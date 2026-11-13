@@ -223,23 +223,25 @@ Cumpliendo con el enunciado de la actividad (*"incorporar al proyecto al menos u
 
 ## 9. Requisito 4: Plan de Pruebas Automatizadas
 
-Se utilizará **Jest y Supertest** para verificar de forma automatizada los endpoints clave y generar las evidencias exigidas por la actividad:
+Se utilizará **Jest y Supertest** para verificar de forma automatizada el funcionamiento de los principales endpoints de la API REST y generar las evidencias exigidas por la actividad.
 
-| ID | Módulo | Caso de Prueba | Condición evaluada | Código HTTP |
+Se realizarán **cinco pruebas automatizadas**, agrupando las comprobaciones relacionadas con las operaciones CRUD, las validaciones de datos, la gestión de matrículas y las reglas de integridad de la base de datos.
+
+| ID | Módulo | Caso de Prueba | Condición evaluada | Código HTTP esperado |
 | :--- | :--- | :--- | :--- | :--- |
-| **T-01** | Alumnos | Alta correcta | Datos válidos y únicos | `201 Created` |
-| **T-02** | Alumnos | Validación de datos | DNI o email vacío o inválido | `400 Bad Request` |
-| **T-03** | Alumnos | Duplicidad | DNI o email ya existente | `409 Conflict` |
-| **T-04** | Cursos | Alta correcta | Código único y plazas > 0 | `201 Created` |
-| **T-05** | Cursos | Alumnos de un curso | Consulta con ID de curso válido | `200 OK` con lista de alumnos |
-| **T-06** | Matrículas | Matriculación válida | Alumno y curso con plazas disponibles | `201 Created` |
-| **T-07** | Matrículas | Bloqueo duplicado activo | Alumno con matrícula activa previa en ese curso | `409 Conflict` |
-| **T-08** | Matrículas | Rematriculación permitida | Alumno con matrícula previa cancelada | `201 Created` |
-| **T-09** | Matrículas | Aforo lleno | Curso sin plazas disponibles | `400 Bad Request` |
-| **T-10** | Integridad | Borrado protegido | `DELETE /api/alumnos/:id` con matrícula asociada | `409 Conflict` (`RESTRICT`) |
+| **T-01** | Alumnos | Operaciones CRUD | Crear, consultar, actualizar y eliminar un alumno con datos válidos. | `201 Created` al crear y `200 OK` en las demás operaciones. |
+| **T-02** | Cursos | Operaciones CRUD y consultas | Crear, consultar, actualizar y eliminar un curso. Comprobar también la consulta de alumnos inscritos en un curso. | `201 Created` al crear y `200 OK` en las consultas y actualizaciones. |
+| **T-03** | Validaciones | Datos incorrectos y duplicados | Comprobar campos obligatorios, formatos inválidos y registros duplicados de alumnos y cursos. | `400 Bad Request` para datos inválidos y `409 Conflict` para duplicados. |
+| **T-04** | Matrículas | Gestión y rematriculación | Crear y consultar matrículas, impedir una matrícula activa duplicada, cancelar una matrícula y permitir una nueva inscripción del mismo alumno en el curso. | `201 Created` para nuevas matrículas, `200 OK` para consultas y cambios de estado y `409 Conflict` para duplicados. |
+| **T-05** | Integridad y reglas de negocio | Control de aforo y borrado protegido | Comprobar que no se permite matricular en un curso sin plazas disponibles y que no se puede eliminar un alumno que tiene matrículas asociadas. | `400 Bad Request` para curso sin plazas y `409 Conflict` para el borrado protegido. |
 
-**Evidencias de Pruebas:** La ejecución del comando `npm test` en la consola se registrará en el documento de evidencias para adjuntar a la entrega.
+**Ejecución y evidencias de pruebas:**
 
+- Las pruebas se implementarán utilizando Jest y Supertest.
+- Se ejecutarán mediante el comando `npm test`.
+- Se comprobarán los resultados de todas las operaciones incluidas en cada prueba.
+- Se corregirán los errores detectados durante la ejecución.
+- Se conservarán capturas o registros de la consola como evidencia para la entrega.
 ---
 
 ## 10. Estructura de Directorios del Proyecto
