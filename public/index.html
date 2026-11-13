@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ClassManager - Gestión de alumnos, cursos y matrículas">
+    <title>ClassManager | Gestión académica</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header__container">
+            <a href="#" class="header__logo">ClassManager</a>
+            <span class="header__subtitle">Panel de gestión académica</span>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <section class="welcome">
+            <h1>Panel de administración</h1>
+            <p>Gestiona los alumnos, cursos y matrículas de tu centro.</p>
+        </section>
+
+        <section class="dashboard">
+            <article class="dashboard__card">
+                <span class="dashboard__label">Alumnos</span>
+                <strong class="dashboard__number" id="total-alumnos">0</strong>
+            </article>
+
+            <article class="dashboard__card">
+                <span class="dashboard__label">Cursos</span>
+                <strong class="dashboard__number" id="total-cursos">0</strong>
+            </article>
+
+            <article class="dashboard__card">
+                <span class="dashboard__label">Matrículas</span>
+                <strong class="dashboard__number" id="total-matriculas">0</strong>
+            </article>
+        </section>
+
+        <nav class="navigation">
+            <button class="navigation__button navigation__button--active" data-section="alumnos">Alumnos</button>
+            <button class="navigation__button" data-section="cursos">Cursos</button>
+            <button class="navigation__button" data-section="matriculas">Matrículas</button>
+        </nav>
+
+        <section class="content">
+
+            <div id="seccion-alumnos" class="content__section">
+                <div class="content__header">
+                    <div>
+                        <h2>Gestión de alumnos</h2>
+                        <p>Consulta y administra los alumnos registrados.</p>
+                    </div>
+                    <button class="button button--primary" id="btn-nuevo-alumno">+ Nuevo alumno</button>
+                </div>
+                <div id="lista-alumnos" class="table-container"></div>
+            </div>
+
+            <div id="seccion-cursos" class="content__section" hidden>
+                <div class="content__header">
+                    <div>
+                        <h2>Gestión de cursos</h2>
+                        <p>Consulta y administra los cursos disponibles.</p>
+                    </div>
+                    <button class="button button--primary" id="btn-nuevo-curso">+ Nuevo curso</button>
+                </div>
+                <div id="lista-cursos" class="table-container"></div>
+            </div>
+
+            <div id="seccion-matriculas" class="content__section" hidden>
+                <div class="content__header">
+                    <div>
+                        <h2>Gestión de matrículas</h2>
+                        <p>Consulta y administra las matrículas de los alumnos.</p>
+                    </div>
+                    <button class="button button--primary" id="btn-nueva-matricula">+ Nueva matrícula</button>
+                </div>
+                <div id="lista-matriculas" class="table-container"></div>
+            </div>
+
+        </section>
+
+        <div id="mensaje-global" class="notification" role="status" aria-live="polite"></div>
+
+    </main>
+
+    <!-- VENTANA DE FORMULARIOS -->
+    <dialog class="modal" id="modal-formulario">
+        <div class="modal__header">
+            <div>
+                <h2 id="modal-titulo">Nuevo registro</h2>
+                <p id="modal-descripcion">Introduce los datos del registro.</p>
+            </div>
+            <button type="button" class="modal__close" id="modal-cerrar" aria-label="Cerrar">&times;</button>
+        </div>
+
+        <form id="formulario-registro">
+            <div id="modal-campos" class="modal__fields"></div>
+            <p id="modal-error" class="modal__error" role="alert"></p>
+
+            <div class="modal__actions">
+                <button type="button" class="button button--secondary" id="modal-cancelar">Cancelar</button>
+                <button type="submit" class="button button--primary" id="modal-guardar">Guardar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <footer class="footer">
+        <p>ClassManager &copy; 2026 - Proyecto de gestión académica</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
